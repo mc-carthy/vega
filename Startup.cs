@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -30,6 +31,7 @@ namespace WebApplicationBasic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             // The below line carries out the same function as the one below it
             // services.AddDbContext<VegaDbContext>((options) => options.UseSqlServer(Configuration["ConnectionStrings:Default"])); 
             services.AddDbContext<VegaDbContext>((options) => options.UseSqlServer(Configuration.GetConnectionString("Default")));

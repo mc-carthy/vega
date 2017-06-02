@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using vega.Persistence;
 
 namespace WebApplicationBasic
 {
@@ -28,6 +30,9 @@ namespace WebApplicationBasic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // The below line carries out the same function as the one below it
+            // services.AddDbContext<VegaDbContext>((options) => options.UseSqlServer(Configuration["ConnectionStrings:Default"])); 
+            services.AddDbContext<VegaDbContext>((options) => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             // Add framework services.
             services.AddMvc();
         }

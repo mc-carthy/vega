@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
-import { sharedConfig } from './app.module.shared';
+import { sharedConfig } from './app.module';
 
 @NgModule({
     bootstrap: sharedConfig.bootstrap,

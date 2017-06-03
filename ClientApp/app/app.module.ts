@@ -10,6 +10,7 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 
 import { MakeService } from './services/make.service';
+import { FeatureService } from './services/feature.service';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -33,6 +34,7 @@ export const sharedConfig: NgModule = {
         ])
     ],
     providers: [
-        MakeService
+        MakeService,
+        FeatureService
     ]
 };

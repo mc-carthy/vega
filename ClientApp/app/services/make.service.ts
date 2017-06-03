@@ -9,7 +9,8 @@ export class MakeService {
 
   getMakes()
   {
-    return this.http.get('/api/makes')
+    // For some reason, absolute links must be used. Something to do with the location.origin provider in app.module.client.ts
+    return this.http.get('http://localhost:5000/api/makes')
       .map(res => res.json());
   }
 

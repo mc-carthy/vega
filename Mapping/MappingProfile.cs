@@ -42,10 +42,10 @@ namespace vega.Mapping
 
                     // Add new features
 
-                    var addedFeatures = vr.Features.Where(id => !v.Features.Any(f => f.FeatureId == id));
-                    foreach (var id in addedFeatures)
+                    var addedFeatures = vr.Features.Where(id => !v.Features.Any(f => f.FeatureId == id)).Select(id => new VehicleFeature {FeatureId = id });
+                    foreach (var f in addedFeatures)
                     {
-                        v.Features.Add(new VehicleFeature { FeatureId = id });
+                        v.Features.Add(f);
                     }
                 });
         }

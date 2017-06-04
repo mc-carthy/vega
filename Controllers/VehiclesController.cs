@@ -22,6 +22,27 @@ namespace vega.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            /*  
+            
+            The below section is not required becuase we're sending this information using our Angular
+            form which is populated from the server. Malicious users will simply get a 500 error with
+            no detail
+
+            var model = context.Models.Find(vehicleResource.ModelId);
+            // var model = await context.Models.FindAsync(vehicleResource.ModelId);
+            if (model == null)
+            {
+                ModelState.AddModelError("ModelId", "Invalid modelID");
+                return BadRequest(ModelState);
+            }
+            
+            */
+
             var vehicle = Mapper.Map<VehicleResource, Vehicle>(vehicleResource);
             vehicle.LastUpdate = DateTime.Now;
             

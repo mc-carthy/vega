@@ -32,6 +32,7 @@ namespace WebApplicationBasic
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();  
             services.AddAutoMapper(typeof(Startup));
             // The below line carries out the same function as the one below it
             // services.AddDbContext<VegaDbContext>((options) => options.UseSqlServer(Configuration["ConnectionStrings:Default"])); 

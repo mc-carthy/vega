@@ -1,3 +1,5 @@
+import * as Raven from 'raven-js';
+
 import { AppErrorHandler } from './app.error-handler';
 import { ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,6 +15,8 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 
 import { VehicleService } from './services/vehicle.service';
+
+Raven.config('https://2ca59051a6fc43038dd60b19cd58af33@sentry.io/176216').install();
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],

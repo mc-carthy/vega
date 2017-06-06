@@ -45,7 +45,7 @@ namespace vega.Mapping
                 .AfterMap((vr, v) => {
                     // Remove unselected features
 
-                    var removedFeatures = v.Features.Where(f => !vr.Features.Contains(f.FeatureId));
+                    var removedFeatures = v.Features.Where(f => !vr.Features.Contains(f.FeatureId)).ToList();
                     foreach (var f in removedFeatures)
                     {
                         v.Features.Remove(f);

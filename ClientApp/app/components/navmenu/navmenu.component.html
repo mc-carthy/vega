@@ -12,9 +12,11 @@
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
+                <!--The below [routerLinkActiveOptions]="{ exact: true }" directive ensures that the li is only highlighted if the route matches exactly
+                This is necessary as otherwise the "New Vehicle" li would also be highlighted as they both are part of the '/vehicles' route-->
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+                    <a [routerLink]="['/vehicles']">
+                        <span class='glyphicon glyphicon-home'></span> Vehicles
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">

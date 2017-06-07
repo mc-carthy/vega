@@ -5,49 +5,51 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class VehicleService {
+  private readonly absoluteUrl = 'http://localhost:5000';
+  private readonly vehiclesEndpoint = '/api/vehicles/';
 
   constructor(private http: Http) { }
 
   getMakes()
   {
     // For some reason, absolute links must be used. Something to do with the location.origin provider in app.module.client.ts
-    return this.http.get('http://localhost:5000/api/makes')
+    return this.http.get(this.absoluteUrl + '/api/makes')
       .map(res => res.json());
   }
 
   getFeatures()
   {
-    return this.http.get('http://localhost:5000/api/features')
+    return this.http.get(this.absoluteUrl + '/api/features')
       .map(res => res.json());
   }
 
   create(vehicle)
   {
-    return this.http.post('http://localhost:5000/api/vehicles', vehicle)
+    return this.http.post(this.absoluteUrl + this.vehiclesEndpoint, vehicle)
       .map(res => res.json());
   }
 
   getVehicle(id)
   {
-    return this.http.get('http://localhost:5000/api/vehicles/' + id)
+    return this.http.get(this.absoluteUrl + this.vehiclesEndpoint + id)
       .map(res => res.json());
   }
 
   getVehicles()
   {
-    return this.http.get('http://localhost:5000/api/vehicles/')
+    return this.http.get(this.absoluteUrl + this.vehiclesEndpoint)
       .map(res => res.json());
   }
 
   update(vehicle: SaveVehicle)
   {
-    return this.http.put('http://localhost:5000/api/vehicles/' + vehicle.id, vehicle)
+    return this.http.put(this.absoluteUrl + this.vehiclesEndpoint + vehicle.id, vehicle)
       .map(res => res.json());
   }
 
   delete(vehicle)
   {
-    return this.http.delete('http://localhost:5000/api/vehicles/' + vehicle.id)
+    return this.http.delete(this.absoluteUrl + this.vehiclesEndpoint + vehicle.id)
       .map(res => res.json());
   }
 

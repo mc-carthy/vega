@@ -55,7 +55,7 @@ namespace vega.Controllers
             {
                 return BadRequest("Max file size (10Mb) exceeded");
             }
-            if (ACCEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName)))
+            if (!ACCEPTED_FILE_TYPES.Any(s => s == Path.GetExtension(file.FileName)))
             {
                 return BadRequest("Invalid file type");
             }

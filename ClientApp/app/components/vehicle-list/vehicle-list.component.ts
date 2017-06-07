@@ -12,7 +12,9 @@ export class VehicleListComponent implements OnInit {
   vehicles: Vehicle[];
   // allVehicles: Vehicle[];
   makes: KeyValuePair[];
-  query: any = {}; 
+  query: any = {
+    pageSize: 3
+  }; 
   columns = [
     { title: 'Id' },
     { title: 'Contact Name', key: 'contactName', isSortable: true },
@@ -38,24 +40,6 @@ export class VehicleListComponent implements OnInit {
       .subscribe(vehicles => this.vehicles = vehicles);
   }
 
-  // client-side method
-  // onFilterChange()
-  // {
-  //   var vehicles = this.allVehicles;
-
-  //   if (this.filter.makeId)
-  //   {
-  //     vehicles = vehicles.filter(v => v.make.id == this.filter.makeId);
-  //   }
-
-  //   if (this.filter.modelId)
-  //   {
-  //     vehicles = vehicles.filter(v => v.model.id == this.filter.modelId);
-  //   }
-
-  //   this.vehicles = vehicles;
-  // }
-
   onFilterChange()
   {
     this.populateVehicles();
@@ -78,6 +62,12 @@ export class VehicleListComponent implements OnInit {
       this.query.sortBy = columnName;
       this.query.isSortAscending = true;
     }
+    this.populateVehicles();
+  }
+
+  onPageChanged(page)
+  {
+    this.query.page = page;
     this.populateVehicles();
   }
 

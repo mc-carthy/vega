@@ -49,7 +49,7 @@ export class ViewVehicleComponent implements OnInit {
   {
     if (confirm("Are you sure you want to delete this vehicle?"))
     {
-      this.vehicleService.delete(this.vehicle.id)
+      this.vehicleService.delete(this.vehicle)
         .subscribe(x => {
           this.router.navigate(['/vehicles']);
         });

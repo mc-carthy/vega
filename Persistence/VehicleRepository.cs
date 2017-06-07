@@ -46,6 +46,11 @@ namespace vega.Persistence
                 query = query.Where(vega => vega.Model.MakeId == queryObj.MakeId.Value);
             }
 
+            if (queryObj.ModelId.HasValue)
+            {
+                query = query.Where(vega => vega.ModelId == queryObj.ModelId.Value);
+            }
+
             var columnsMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
             {
                 ["make"] = v => v.Model.Make.Name,

@@ -57,7 +57,7 @@ namespace vega.Controllers
             {
                 return BadRequest("Max file size (10Mb) exceeded");
             }
-            if (!photoSettings.AcceptedFileTypes.Any(s => s == Path.GetExtension(file.FileName)))
+            if (!photoSettings.IsSupported(file.FileName))
             {
                 return BadRequest("Invalid file type");
             }

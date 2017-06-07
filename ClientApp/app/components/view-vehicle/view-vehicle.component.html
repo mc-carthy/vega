@@ -3,14 +3,14 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Vehicle</a></li>
-    <li role="presentation"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li>
+    <li role="presentation"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Vehicle</a></li>
+    <li role="presentation" class="active"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li>
   </ul>
 
   <!-- Tab panes -->
   <div class="tab-content" *ngIf="vehicle">
     <!-- Vehicle tab -->
-    <div role="tabpanel" class="tab-pane active" id="basic">
+    <div role="tabpanel" class="tab-pane" id="basic">
       <h2>Basics</h2>
       <ul>
         <li>Make: {{ vehicle.make.name }}</li>
@@ -35,8 +35,9 @@
       </p>
     </div>
     <!-- Photos tab -->
-    <div role="tabpanel" class="tab-pane" id="photos">
+    <div role="tabpanel" class="tab-pane active" id="photos">
       <h2>Photos</h2>
+      <input type="file" (change)="uploadPhoto()" #fileInput> 
     </div>
   </div>
 </div>

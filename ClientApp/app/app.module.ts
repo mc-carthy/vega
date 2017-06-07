@@ -1,3 +1,4 @@
+import { PhotoService } from './services/photo.service';
 import * as Raven from 'raven-js';
 
 import { AppErrorHandler } from './app.error-handler';
@@ -51,6 +52,7 @@ export const sharedConfig: NgModule = {
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler},
-        VehicleService
+        VehicleService,
+        PhotoService
     ]
 };

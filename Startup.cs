@@ -35,6 +35,7 @@ namespace WebApplicationBasic
         {
             services.Configure<PhotoSettings>(Configuration.GetSection("PhotoSettings"));
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();  
             services.AddAutoMapper(typeof(Startup));
             // The below line carries out the same function as the one below it

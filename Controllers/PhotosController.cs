@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,29 +18,39 @@ namespace vega.Controllers
     public class PhotosController : Controller
     {
         private readonly IHostingEnvironment host;
-        private readonly IVehicleRepository repository;
+        private readonly IVehicleRepository vehicleRepository;
+        private readonly IPhotoRepository photoRepository;
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
         private readonly PhotoSettings photoSettings;
         public PhotosController(
             IHostingEnvironment host,
-            IVehicleRepository repository,
+            IVehicleRepository vehicleRepository,
+            IPhotoRepository photoRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper,
             IOptionsSnapshot<PhotoSettings> options
         )
         {
             this.host = host;
-            this.repository = repository;
+            this.vehicleRepository = vehicleRepository;
+            this.photoRepository = photoRepository;
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
             this.photoSettings = options.Value;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+        {
+            var photos = await photoRepository.GetPhotos(vehicleId);
+            return mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
         }
         
         [HttpPost]
         public async Task<IActionResult> Upload(int vehicleId, IFormFile file)
         {
-            var vehicle = await repository.GetVehicle(vehicleId, includeRelated: false);
+            var vehicle = await vehicleRepository.GetVehicle(vehicleId, includeRelated: false);
             if (vehicle == null)
             {
                 return NotFound();

@@ -9,25 +9,26 @@ export class AppErrorHandler implements ErrorHandler {
         @Inject(ToastyService) private toastyService: ToastyService) {
     }
 
-    handleError(error: any): void {
-        if (!isDevMode)
-        {
-            Raven.captureException(error.originalError || error);
-        }
-        else
-        {
-            throw error;
-        }
-        
+    handleError(err: any): void {
         this.ngZone.run(() => {
             this.toastyService.error({
                 title: 'Error',
-                msg: 'An unexpected error occured',
+                msg: err.text(),
                 theme: 'bootstrap',
                 showClose: true,
                 timeout: 5000
             });
         })
+        
+        if (!isDevMode)
+        {
+            Raven.captureException(err.originalError || err);
+        }
+        else
+        {
+            throw err;
+        }
+        
 
     }
 }

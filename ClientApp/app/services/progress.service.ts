@@ -5,55 +5,54 @@ import { BrowserXhr } from "@angular/http";
 @Injectable()
 export class ProgressService {
 
-    private uploadProgress: Subject<any>;
+  private uploadProgress: Subject<any>;
 
-    startTracking()
-    {
-        this.uploadProgress = new Subject();
-        return this.uploadProgress;
-    }
+  startTracking()
+  { 
+    this.uploadProgress = new Subject();
+    return this.uploadProgress;
+  }
 
-    notify(progress)
-    {
-        this.uploadProgress.next(progress);
-    }
-    
-    endTracking()
-    {
-        this.uploadProgress.complete();
-    }
+  notify(progress)
+  {
+    this.uploadProgress.next(progress);
+  }
+
+  endTracking()
+  {
+    this.uploadProgress.complete();
+  }
 }
 
 
 @Injectable()
 export class BrowserXhrWithProgressService extends BrowserXhr {
 
-    constructor(private service: ProgressService) 
-    {
+    constructor(private service: ProgressService)
+    { 
         super();
     }
 
-    build(): XMLHttpRequest
-    {
-        var xhr: XMLHttpRequest = super.build();
-        
-        xhr.upload.onprogress = (event) => {
-            this.service.notify(this.createProgress(event));
-        };
+  build(): XMLHttpRequest
+  {
+    var xhr: XMLHttpRequest = super.build();
+    
+    xhr.upload.onprogress = (event) => {
+      this.service.notify(this.createProgress(event));
+    };
 
-        xhr.upload.onloadend = () => {
-            this.service.endTracking();
-        }
-        
-        return xhr;
+    xhr.upload.onloadend = () => {
+      this.service.endTracking();
     }
+    
+    return xhr; 
+  }
 
-    private createProgress(event)
-    {
-        return {
-            total: event.total,
-            percentage: Math.round(event.loaded / event.total * 100)
-        }
+  private createProgress(event)
+  {
+    return {
+        total: event.total,
+        percentage: Math.round(event.loaded / event.total * 100)
     }
-
+  };
 }

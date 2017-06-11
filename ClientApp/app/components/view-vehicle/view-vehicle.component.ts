@@ -70,7 +70,7 @@ export class ViewVehicleComponent implements OnInit {
   {
     var nativeElement: HTMLInputElement = this.fileInput.nativeElement
 
-    this.progressService.uploadProgress
+    this.progressService.startTracking()
       .subscribe(progress => {
         console.log(progress);
         this.zone.run(() => {
